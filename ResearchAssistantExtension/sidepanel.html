@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Assistant</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="sidepanel.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">✨</div>
+            <h2>Research Assistant</h2>
+        </header>
+
+        <section class="actions-section">
+            <p class="section-desc">Select text on the page and choose an action:</p>
+            <div class="actions">
+                <button id="summarizeBtn" class="btn primary-btn">
+                    <span class="icon">📝</span> Summarize
+                </button>
+                <button id="suggestBtn" class="btn secondary-btn">
+                    <span class="icon">💡</span> Suggest Topics
+                </button>
+            </div>
+        </section>
+
+        <div id="loader-container" class="hidden">
+            <div class="loader"></div>
+            <p class="loader-text">Analyzing with AI...</p>
+        </div>
+
+        <div id="results" class="hidden"></div>
+
+        <section class="notes-section">
+            <div class="notes-header">
+                <h3>Research Notes</h3>
+                <button id="toggleHistoryBtn" class="btn secondary-btn small-btn">📜 History</button>
+            </div>
+            
+            <!-- History Panel (Hidden by default) -->
+            <div id="history-container" class="hidden">
+                <ul id="history-list"></ul>
+            </div>
+
+            <!-- The main workspace -->
+            <div id="workspace">
+                <textarea id="notes" placeholder="Jot down your insights here..."></textarea>
+                <div class="workspace-actions">
+                    <button id="saveNotesBtn" class="btn save-btn">Save Note</button>
+                    <button id="newNoteBtn" class="btn secondary-btn">➕ New</button>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script src="sidepanel.js"></script>
+</body>
+</html>
