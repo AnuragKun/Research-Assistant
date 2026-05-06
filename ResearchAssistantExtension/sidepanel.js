@@ -1,5 +1,7 @@
-let currentNoteId = null; // Store the ID of the note we are editing
+const API_BASE_URL = 'https://research-assistant-lub2.onrender.com'; // Change back to http://localhost:8080 for local testing
+const API_KEY = ''; // Put the secret you created in Render here!
 
+let currentNoteId = null; // Store the ID of the note we are editing
 document.addEventListener('DOMContentLoaded', () => {
     // Fetch the saved note from the database instead of local storage
     fetchNotesFromDB();
@@ -16,9 +18,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function fetchNotesFromDB() {
     try {
-        const response = await fetch('http://localhost:8080/api/notes', {headers:
+        const response = await fetch(`${API_BASE_URL}/api/notes`, {headers:
                 {
-                    'x-api-key': 'my-super-secret-dev-key'
+                    'x-api-key': API_KEY
                 }
         });
         if (response.ok) {
@@ -62,11 +64,11 @@ async function processContent(operation) {
         }
 
         // Call backend
-        const response = await fetch('http://localhost:8080/api/research/process', {
+        const response = await fetch(`${API_BASE_URL}/api/research/process`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'x-api-key': 'my-super-secret-dev-key'
+                'x-api-key': API_KEY
             },
             body: JSON.stringify({content: result, operation: operation})
         });
@@ -96,12 +98,12 @@ async function saveNotesToDB() {
     const saveBtn = document.getElementById('saveNotesBtn');
     
     try {
-        let url = 'http://localhost:8080/api/notes';
+        let url = `${API_BASE_URL}/api/notes`;
         let method = 'POST'; // Default to creating a new note
         
         // If we already have a note loaded, we UPDATE it instead of creating a new one
         if (currentNoteId !== null) {
-            url = `http://localhost:8080/api/notes/${currentNoteId}`;
+            url = `${API_BASE_URL}/api/notes/${currentNoteId}`;
             method = 'PUT';
         }
 
@@ -109,7 +111,7 @@ async function saveNotesToDB() {
             method: method,
             headers: {
                 'Content-Type': 'application/json',
-                'x-api-key': 'my-super-secret-dev-key'
+                'x-api-key': API_KEY
             },
             body: JSON.stringify({ content: notesContent, title: "My Workspace" })
         });
@@ -214,9 +216,9 @@ async function loadHistory() {
     historyList.innerHTML = '<p class="loader-text" style="text-align: center;">Loading...</p>';
     
     try {
-        const response = await fetch('http://localhost:8080/api/notes', {
+        const response = await fetch(`${API_BASE_URL}/api/notes`, {
             headers: {
-                'x-api-key': 'my-super-secret-dev-key'
+                'x-api-key': API_KEY
             }
         });
         if (response.ok) {
@@ -274,10 +276,10 @@ async function deleteNote(id, event) {
 
     try {
         // Send DELETE request to your Spring Boot API
-        const response = await fetch(`http://localhost:8080/api/notes/${id}`, {
+        const response = await fetch(`${API_BASE_URL}/api/notes/${id}`, {
             method: 'DELETE',
             headers: {
-                'x-api-key': 'my-super-secret-dev-key'
+                'x-api-key': API_KEY
             }
         });
         
