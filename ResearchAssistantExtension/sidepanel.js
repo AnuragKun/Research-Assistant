@@ -137,7 +137,48 @@ async function saveNotesToDB() {
 
 function showResult(content) {
     const resultsContainer = document.getElementById('results');
-    resultsContainer.innerHTML = `<div class="result-item"><div class="result-content">${content}</div></div>`;
+    resultsContainer.innerHTML = `
+        <div class="result-item">
+            <div class="result-content">${content}</div>
+            <div style="margin-top: 15px; text-align: right;">
+                <button class="btn secondary-btn add-to-notes-btn" style="font-size: 0.75rem; padding: 6px 12px; display: inline-flex; align-items: center; gap: 4px;">
+                    📝 Add to Notes
+                </button>
+            </div>
+        </div>
+    `;
+    
+    // Add event listener to the new button
+    resultsContainer.querySelector('.add-to-notes-btn').addEventListener('click', (e) => {
+        const notesArea = document.getElementById('notes');
+        const currentNotes = notesArea.value;
+        const separator = currentNotes.trim() ? '\n\n---\n\n' : '';
+        
+        // Convert <br> tags back to newlines for the textarea
+        const plainText = content.replace(/<br>/g, '\n');
+        
+        // Append the new text
+        notesArea.value = currentNotes + separator + plainText;
+        
+        // Scroll to the bottom of the textarea
+        notesArea.scrollTop = notesArea.scrollHeight;
+        
+        // Visual feedback on the button
+        const btn = e.target;
+        const originalHtml = btn.innerHTML;
+        btn.innerHTML = '✓ Added!';
+        btn.style.backgroundColor = '#10b981';
+        btn.style.color = 'white';
+        btn.style.borderColor = '#10b981';
+        
+        setTimeout(() => {
+            btn.innerHTML = originalHtml;
+            btn.style.backgroundColor = '';
+            btn.style.color = '';
+            btn.style.borderColor = '';
+        }, 2000);
+    });
+
     resultsContainer.classList.remove('hidden');
 }
 
