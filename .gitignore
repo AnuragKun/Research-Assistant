@@ -32,3 +32,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Chrome Extension Secrets ###
+ResearchAssistantExtension/config.js

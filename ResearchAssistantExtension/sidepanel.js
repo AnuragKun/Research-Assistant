@@ -1,5 +1,4 @@
 const API_BASE_URL = 'https://research-assistant-lub2.onrender.com'; // Change back to http://localhost:8080 for local testing
-const API_KEY = ''; // Put the secret you created in Render here!
 
 let currentNoteId = null; // Store the ID of the note we are editing
 document.addEventListener('DOMContentLoaded', () => {
