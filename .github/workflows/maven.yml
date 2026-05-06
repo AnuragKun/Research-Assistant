@@ -21,4 +21,4 @@ jobs:
           cache: maven
 
       - name: Run Unit and Integration Tests
-        run: ./mvwn test
+        run: mvn test
